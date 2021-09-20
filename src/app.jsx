@@ -1,5 +1,4 @@
 
-import react from 'react';
 import './app.css';
 import Habit from './components/habit';
 
