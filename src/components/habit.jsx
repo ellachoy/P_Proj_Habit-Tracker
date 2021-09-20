@@ -11,7 +11,10 @@ class Habit extends Component {
       this.setState({count: this.state.count +1 })
     };
     handleDecrement = () =>{
-         this.setState({count: this.state.count -1 })
+
+        //  this.setState({count: this.state.count -1 }) // minus zahlen abgezeigt deshalb unten code
+        const count = this.state.count -1;
+        this.setState({count:count <0 ? 0:count})
        };
     render() {
         return ( 
