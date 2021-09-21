@@ -5,29 +5,32 @@ class Habit extends Component {
     state ={
      count:0,
     };
-
     handleIncrement = () =>{
      //state 오브젝트 안에있는  count를 증가 한뒤  state를 업데이트 해야함. state를 업데이트 하려면, setState로. 
       this.setState({count: this.state.count +1 })
     };
     handleDecrement = () =>{
-
         //  this.setState({count: this.state.count -1 }) // minus zahlen abgezeigt deshalb unten code
         const count = this.state.count -1;
         this.setState({count:count <0 ? 0:count})
        };
     render() {
+        console.log(this.props.habit);
+        // const habitName =this.props.habit.name;
+        const { name, count} =this.props.habit;
         return ( 
             <li className="habit">
-            <span className="habit-name">Reading</span>
-            <span className="habit-count">{this.state.count}</span>
+            <span className="habit-name">{name}</span>
+            <span className="habit-count">{count}</span>
 
             <button className="habit-button habit-increase" onClick={this.handleIncrement}>
             <i className="fas fa-plus-square"></i>
             </button>
+
             <button className="habit-button habit-decrease" onClick={this.handleDecrement}>
             <i className="fas fa-minus-square"></i>
             </button>
+            
             <button className="habit-button habit-delete">
             <i className="fas fa-trash"></i>
             </button>
