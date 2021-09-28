@@ -12,16 +12,28 @@ class Habits extends Component {
   } //data를 가지고 있는 state *(state =Object, array habits is in state )
 
   //param habit 을 받아 카운트를 증가, 감소..
+  //
   handleIncrement = habit => {
-    console.log(`handleIncrement ${habit}`) //handleIncrement가 호출되고  증가해야 하는 habit 출력. 
+    console.log(`handleIncrement ${habit.name}`) //handleIncrement가 호출되고  증가해야 하는 habit. Reading count 가 증가 되며 출력.
+    const habits = [...this.state.habits] //habits라는 배열 안 아템들을 하씩 새운 배열안으로 복사 오는 것.
+    const index = habits.indexOf(habit)
+    habits[index].count++
+    this.setState({ habits: habits })
   }
 
   handleDecrement = habit => {
-    console.log(`handleDecrement ${habit}`)
+    console.log(`handleDecrement ${habit.name}`)
+    const habits = [...this.state.habits]
+    const index = habits.indexOf(habit)
+    const count = habits[index].count - 1
+    habits[index].count = count < 0 ? 0 : count
+    this.setState({ habits: habits })
   }
   //param habit 을 받아 어떤 habit을 삭제 할것인지.
   handleDelete = habit => {
-    console.log(`handleDelete ${habit}`)
+    console.log(`handleDelete ${habit.name}`)
+    const habits = this.state.habits.filter(item => item.id !== habit.id)
+    this.setState({ habits: habits })
   }
 
   render() {
@@ -35,7 +47,7 @@ class Habits extends Component {
               <Habit
                 key={habit.id}
                 habit={habit}
-                onIncrement={this.handleIncrement}//callback func.
+                onIncrement={this.handleIncrement} //callback func.
                 onDecrement={this.handleDecrement}
                 onDelete={this.handleDelete}
               />
